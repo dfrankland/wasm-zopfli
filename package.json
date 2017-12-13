@@ -1,6 +1,6 @@
 {
   "name": "wasm-zopfli",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "🗜 WebAssembly compiled Zopfli library",
   "repository": {
     "type": "git",
