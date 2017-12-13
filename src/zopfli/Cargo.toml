@@ -1,0 +1,6 @@
+[package]
+name = "wasm-zopfli"
+version = "0.0.0"
+
+[dependencies]
+zopfli = "0.3.6"

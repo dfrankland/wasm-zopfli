@@ -1,0 +1,43 @@
+{
+  "name": "wasm-zopfli",
+  "version": "0.0.0",
+  "description": "🗜 WebAssembly compiled Zopfli library",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dfrankland/wasm-zopfli.git"
+  },
+  "keywords": [
+    "wasm",
+    "zopfli",
+    "gzip",
+    "deflate",
+    "zlib",
+    "rust",
+    "compression"
+  ],
+  "author": "Dylan Frankland",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dfrankland/wasm-zopfli/issues"
+  },
+  "homepage": "https://github.com/dfrankland/wasm-zopfli#readme",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "pretest": "npm run build",
+    "test": "node ./src/__tests__/wasm-zopfli.spec.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.34",
+    "@babel/preset-env": "^7.0.0-beta.34",
+    "@babel/preset-stage-0": "^7.0.0-beta.34",
+    "rollup": "^0.52.1",
+    "rollup-plugin-babel": "^4.0.0-beta.0",
+    "rollup-plugin-commonjs": "^8.2.3",
+    "rollup-plugin-docker": "^0.1.0",
+    "rollup-plugin-wasm-module": "0.0.3"
+  },
+  "dependencies": {
+    "kaffeerost": "0.0.1"
+  }
+}
