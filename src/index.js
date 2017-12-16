@@ -16,7 +16,7 @@ const formats = {
 export const zopfli = (format) => {
   if (!formats[format]) throw new Error('format is invalid');
 
-  return async (data, log = () => undefined) => {
+  return async (data) => {
     if (!(data instanceof Uint8Array)) throw new Error('data must be a Uint8Array');
 
     const {
@@ -26,7 +26,7 @@ export const zopfli = (format) => {
     } = await zopfliWasmModule({
       env: {
         memory: new WebAssembly.Memory({ initial: 4096, limit: 4096 }),
-        log,
+        log: x => Math.log(x),
       },
     });
 
