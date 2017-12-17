@@ -16,7 +16,7 @@ import {
   zopfli,
 } from '../../';
 
-jest.setTimeout(15000);
+jest.setTimeout(60000);
 
 const input = readFileSync(resolvePath(__dirname, './__fixtures__/code.jpg'));
 
