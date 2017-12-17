@@ -26,7 +26,7 @@
     "build": "rollup -c",
     "pretest": "npm run build",
     "test": "jest",
-    "lint": "eslint -c ./package.json ./src/**/*.js"
+    "lint": "eslint -c ./package.json ./*.js ./src/**/*.js ./benchmark/*.js ./benchmark/src/**/*.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.35",
@@ -80,7 +80,7 @@
         "error",
         {
           "devDependencies": [
-            "rollup.config.js",
+            "**/rollup.config.js",
             "**/__tests__/**/*"
           ]
         }

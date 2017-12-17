@@ -112,3 +112,37 @@ Constant, reference, for compressing data with `zopfli` using gzip.
 Constant, reference, for compressing data with `zopfli` using zlib.
 
 [mdn uint8array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
+
+## Benchmark
+
+Want to see how fast this is? [Go to the benchmark directory][benchmark] to see
+results, instructions on running your own benchmark, and more.
+
+[benchmark]: https://github.com/dfrankland/wasm-zopfli/tree/master/benchmark
+
+## Development
+
+To build `wasm-zopfli` you will need to [install Docker][docker install], and
+pull [`rustlang/rust:nightly`][rust nightly]. After that all that is needed is
+to do the following:
+
+1.  Install all dependencies.
+
+```bash
+npm install
+```
+
+2.  Build the module.
+
+```bash
+npm run build
+```
+
+3.  Test the module.
+
+```bash
+npm test
+```
+
+[docker install]: https://docs.docker.com/engine/installation/
+[rust nightly]: https://hub.docker.com/r/rustlang/rust/
