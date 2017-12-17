@@ -83,7 +83,7 @@ describe('zopfli', () => {
     throw new Error('test failed');
   });
 
-  it('checks for proper format given to `zopfli` function', () => {
-    expect(() => zopfli('blah')).toThrow('format is invalid');
+  it('checks for proper format given to `zopfli` function', async () => {
+    await expect(zopfli('bad format', 'not a Unit8Array')).rejects.toThrow('format is invalid');
   });
 });
