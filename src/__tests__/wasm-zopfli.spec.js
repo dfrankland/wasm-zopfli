@@ -1,6 +1,14 @@
 import { promisify } from 'util';
-import { inflateRaw, gunzip, inflate } from 'zlib';
+import {
+  deflateRaw as normalDeflateRaw,
+  gzip as normalGzip,
+  deflate as normalDeflate,
+  inflateRaw,
+  gunzip,
+  inflate,
+} from 'zlib';
 import { readFileSync } from 'fs';
+import { resolve as resolvePath } from 'path';
 import { runInNewContext } from 'vm';
 
 jest.setTimeout(15000);
@@ -24,35 +32,55 @@ const {
   },
 } = sandbox;
 
-describe('zlib', () => {
+const input = readFileSync(resolvePath(__dirname, './__fixtures__/code.jpg'));
+
+describe('zopfli', () => {
   it('can deflate (deflate raw)', async () => {
-    const input = 'blah';
+    const [
+      zopfliCompressed,
+      normalCompressed,
+    ] = await Promise.all([
+      promisify(normalDeflateRaw)(input),
+      deflate(input),
+    ]);
 
-    const compressed = await deflate(Buffer.from(input, 'utf8'));
-    const decompressed = await promisify(inflateRaw)(compressed);
-    const result = decompressed.toString('utf8');
+    expect(zopfliCompressed.length).toBeLessThan(normalCompressed.length);
 
-    expect(result).toEqual(input);
+    const decompressed = await promisify(inflateRaw)(zopfliCompressed);
+
+    expect(decompressed).toEqual(input);
   });
 
   it('can gzip', async () => {
-    const input = 'blah';
+    const [
+      zopfliCompressed,
+      normalCompressed,
+    ] = await Promise.all([
+      promisify(normalGzip)(input),
+      gzip(input),
+    ]);
 
-    const compressed = await gzip(Buffer.from(input, 'utf8'));
-    const decompressed = await promisify(gunzip)(compressed);
-    const result = decompressed.toString('utf8');
+    expect(zopfliCompressed.length).toBeLessThan(normalCompressed.length);
 
-    expect(result).toEqual(input);
+    const decompressed = await promisify(gunzip)(zopfliCompressed);
+
+    expect(decompressed).toEqual(input);
   });
 
   it('can zlib (deflate)', async () => {
-    const input = 'blah';
+    const [
+      zopfliCompressed,
+      normalCompressed,
+    ] = await Promise.all([
+      promisify(normalDeflate)(input),
+      zlib(input),
+    ]);
 
-    const compressed = await zlib(Buffer.from(input, 'utf8'));
-    const decompressed = await promisify(inflate)(compressed);
-    const result = decompressed.toString('utf8');
+    expect(zopfliCompressed.length).toBeLessThan(normalCompressed.length);
 
-    expect(result).toEqual(input);
+    const decompressed = await promisify(inflate)(zopfliCompressed);
+
+    expect(decompressed).toEqual(input);
   });
 
   it('checks for `Uint8Array` input', async () => {
