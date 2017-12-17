@@ -21,6 +21,7 @@ export default {
     }),
     babel({
       include: ['**/*.js'],
+      babelrc: false,
       presets: [
         [
           '@babel/preset-env',
