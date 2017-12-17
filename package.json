@@ -53,6 +53,9 @@
     "kaffeerost": "0.0.1"
   },
   "babel": {
+    "only": [
+      "./src/**/*.js"
+    ],
     "presets": [
       [
         "env",

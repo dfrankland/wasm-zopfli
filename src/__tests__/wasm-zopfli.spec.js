@@ -9,28 +9,14 @@ import {
 } from 'zlib';
 import { readFileSync } from 'fs';
 import { resolve as resolvePath } from 'path';
-import { runInNewContext } from 'vm';
+import {
+  deflate,
+  gzip,
+  zlib,
+  zopfli,
+} from '../../';
 
 jest.setTimeout(15000);
-
-// This fixes a problem with Jest, which makes it freeze when importing
-// `wasm-zopfli` for some reason.
-const wasmZopfli = readFileSync(require.resolve('../../'), { encoding: 'utf8' });
-const sandbox = {
-  exports: {},
-  require,
-  Buffer,
-  Uint8Array,
-};
-runInNewContext(wasmZopfli, sandbox);
-const {
-  exports: {
-    deflate,
-    gzip,
-    zlib,
-    zopfli,
-  },
-} = sandbox;
 
 const input = readFileSync(resolvePath(__dirname, './__fixtures__/code.jpg'));
 
