@@ -22,6 +22,13 @@
   },
   "homepage": "https://github.com/dfrankland/wasm-zopfli#readme",
   "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "browser": "./dist/browser.js",
+  "files": [
+    "dist/index.js",
+    "dist/index.mjs",
+    "dist/browser.js"
+  ],
   "scripts": {
     "build": "rollup -c",
     "pretest": "npm run build",
@@ -30,6 +37,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.35",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.35",
     "@babel/preset-env": "^7.0.0-beta.35",
     "@babel/preset-stage-0": "^7.0.0-beta.35",
     "babel-eslint": "^8.0.3",
@@ -47,9 +55,12 @@
     "rollup-plugin-babel": "^4.0.0-beta.0",
     "rollup-plugin-commonjs": "^8.2.3",
     "rollup-plugin-docker": "^0.1.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-wasm-module": "0.0.3"
   },
   "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.35",
     "kaffeerost": "0.0.1"
   },
   "babel": {
