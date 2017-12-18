@@ -52,16 +52,11 @@ const content = new TextEncoder('utf-8').encode('Hello, world!');
   try {
     const compressedContent = await gzip(content);
 
-    const base64CompressedContent = btoa((
-      compressedContent.reduce(
-        (string, charCode) => `${string}${String.fromCharCode(charCode)}`,
-        '',
-      )
-    ));
+    const file = new File([compressedContent], 'hello_world.txt.gz', { type: 'application/gzip' });
 
     const link = document.createElement('a');
-    link.setAttribute('href', `data:application/gzip;base64,${base64CompressedContent}`);
-    link.setAttribute('download', 'hello_world.txt.gz');
+    link.setAttribute('href', URL.createObjectURL(file));
+    link.setAttribute('download', file.name);
     link.click();
   } catch (err) {
     console.error(err);
