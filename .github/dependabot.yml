@@ -1,0 +1,24 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "13:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@babel/runtime"
+    versions:
+    - 7.12.5
+  - dependency-name: "@babel/preset-env"
+    versions:
+    - 7.12.11
+  - dependency-name: "@babel/plugin-transform-runtime"
+    versions:
+    - 7.12.10
+- package-ecosystem: cargo
+  directory: "/src/zopfli"
+  schedule:
+    interval: monthly
+    time: "13:00"
+  open-pull-requests-limit: 10
